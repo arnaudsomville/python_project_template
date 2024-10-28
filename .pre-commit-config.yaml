@@ -1,0 +1,41 @@
+repos:
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: 'v0.3.3'  # Remplacez par la version souhaitée
+    hooks:
+      - id: ruff
+        name: ruff-format
+        args: ['--fix']
+      - id: ruff
+        name: ruff-lint
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'v0.971'  # Remplacez par la version souhaitée
+    hooks:
+      - id: mypy
+
+  # - repo: local
+  #   hooks:
+  #     - id: jupyter-trim
+  #       name: jupyter-trim
+  #       entry: ./hooks/jupyter-trim.bash
+  #       language: script
+  #       types_or: [jupyter]
+  #       require_serial: true
+  #       minimum_pre_commit_version: "2.9.2"
+
+  #     - id: sphinx-doc
+  #       name: sphinx-doc
+  #       entry: ./hooks/sphinx-doc.bash
+  #       language: script
+  #       types_or: [python, pyi]
+  #       require_serial: true
+  #       pass_filenames: false
+  #       minimum_pre_commit_version: "2.9.2"
+
+  #     - id: trufflehog
+  #       name: trufflehog
+  #       entry: ./hooks/trufflehog.bash
+  #       language: script
+  #       require_serial: true
+  #       pass_filenames: true
+  #       minimum_pre_commit_version: "2.9.2"
