@@ -50,6 +50,64 @@ To use the project, you need to activate the `my_env` Conda environment created 
      ```
    - Ensure it matches the Python version installed in your `my_env` environment.
 
+## Setting Up Documentation with Sphinx
+
+This project uses Sphinx to generate documentation. Follow the steps below to set up and customize your documentation:
+
+### Steps to Set Up Documentation
+
+1. **Activate the Conda Environment:**
+   - Open a terminal in your project directory and activate the `my_env` environment:
+     ```bash
+     conda activate my_env
+     ```
+
+2. **Initialize Sphinx:**
+   - Run the Sphinx setup command:
+     ```bash
+     sphinx-quickstart docs
+     ```
+   - Follow the prompts to configure Sphinx:
+     - **Separate source and build directories?** Yes.
+     - **Project name:** Enter your project name.
+     - **Author name:** Enter your name.
+     - **Project release:** Specify the release version, e.g., `0.1.0`.
+     - **Language:** Leave blank for default (English).
+
+3. **Customize `conf.py`:**
+   - Open the `docs/conf.py` file to configure Sphinx.
+   - Add any required extensions, such as:
+     ```python
+     extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon", "sphinx.ext.viewcode"]
+     ```
+
+4. **Generate Documentation:**
+   - Build the documentation with:
+     ```bash
+     make html
+     ```
+   - The HTML files will be generated in the `docs/_build/html` directory.
+
+5. **Preview the Documentation:**
+   - Open the `index.html` file in a web browser:
+     ```bash
+     open docs/_build/html/index.html
+     ```
+
+### Customizing the Documentation
+
+- **Add Content:**
+  - Write your documentation in `.rst` files within the `docs/source` directory.
+  - Update the `index.rst` file to include references to your new files.
+
+- **Automate API Documentation:**
+  - Use `sphinx.ext.autodoc` to automatically generate documentation from your Python code:
+    ```bash
+    sphinx-apidoc -o docs/source/ src/
+    ```
+
+With these steps, you can easily set up and manage your project documentation using Sphinx.
+
 ## Deploying Documentation to GitHub Pages
 
 This project is set up to automatically generate and deploy Sphinx documentation to GitHub Pages using a GitHub Actions workflow. Follow these simple steps to enable deployment of your documentation:
