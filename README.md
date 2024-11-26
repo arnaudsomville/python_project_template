@@ -6,6 +6,10 @@
 ```
 make ENV=my_env
 ```
+Or **for WINDOWS**
+```
+make -f Makefile_Windows ENV=my_env
+```
 During this step you will have to enter informations in the terminal. Here is what you have to enter :
 
 * _Please enter the Python interpreter to use :_ Answer 0
