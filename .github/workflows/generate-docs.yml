@@ -81,13 +81,13 @@ jobs:
         run: |
           source ~/.bashrc
           conda activate ci_env
+          pip install sphinx
 
           if [ ! -d "docs" ]; then
             echo "Dossier 'docs' non trouvé. Exécution de 'make sphinx_setup'..."
             make sphinx_setup ENV=ci_env
           fi
 
-          pip install sphinx
           sphinx-apidoc -o docs/source src/ --force --separate
           cd docs
           pdm run make clean
