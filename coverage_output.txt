@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.10, pytest-8.3.3, pluggy-1.5.0
+rootdir: /home/arnaud/workspace/other/python_project_template
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-6.0.0, mock-3.14.0, anyio-4.6.2.post1
+collected 1 item
+
+tests/python_project_template/test_processings/test_dummy.py .           [100%]
+
+---------- coverage: platform linux, python 3.11.10-final-0 ----------
+Name                                               Stmts   Miss  Cover
+----------------------------------------------------------------------
+src/python_project_template/__init__.py                0      0   100%
+src/python_project_template/processings/dummy.py       2      0   100%
+----------------------------------------------------------------------
+TOTAL                                                  2      0   100%
+Coverage HTML written to dir htmlcov
+Coverage JSON written to file coverage.json
+
+Required test coverage of 85% reached. Total coverage: 100.00%
+
+============================== 1 passed in 0.04s ===============================

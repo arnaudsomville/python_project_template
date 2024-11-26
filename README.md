@@ -1,16 +1,15 @@
 # Python base project
 
 1. To setup the environnement, make sure to install miniconda https://docs.anaconda.com/miniconda/miniconda-install/
-2. Create your python environnement
+2. Setup everything by executing the makefile. Open a terminal in this folder and execute :
 ```
-conda create -y -n my_env python=3.11
-conda activate my_env
-pip install pdm ruff=0.3.3 pre-commit
+make ENV=my_env
 ```
-3. Go to your folder and install the packages. Initialize the project if needed
+During this step you will have to enter informations in the terminal. Here is what you have to enter :
 
-```
-cd ~/your_work_folder
-pdm init #Only if needed
-pdm install
-```
+* _Please enter the Python interpreter to use :_ Answer 0
+* _Project name (python_project_template):_ Write your project name **Avoid spaces and -, it can't be empty**
+* _Project version (0.1.0):_ The version you want
+* _If yes, it will be installed by default when running `pdm install`. [y/n] (n):_ **Answer y** 
+* _Project description (): _ The description you want (can be empty)
+* _Which build backend to use?_ **Answer 1 (setuptools)**

@@ -1,0 +1,100 @@
+name: Build, Test, and Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-activate-base: false
+
+      - name: Set up Conda environment
+        run: |
+          conda init bash
+          source ~/.bashrc
+          conda create -n ci_env python=3.11 -y
+          conda activate ci_env
+          pip install --upgrade pip
+          pip install pdm==2.20.1 pre-commit
+          pdm config python.use_venv false
+          pdm install --dev
+
+      - name: Run pre-commit hooks
+        run: |
+          source ~/.bashrc
+          conda activate ci_env
+          pre-commit run -a
+
+      - name: Run tests with coverage
+        run: |
+          source ~/.bashrc
+          conda activate ci_env
+          set +e
+          pdm run pytest --cov=src --cov-report=term --cov-report=json --cov-report=html --cov-fail-under=85 > coverage_output.txt
+          TEST_EXIT_CODE=$?
+          set -e
+          echo "# Test Coverage Summary" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          grep -A 15 "coverage:" coverage_output.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat $GITHUB_STEP_SUMMARY
+          exit $TEST_EXIT_CODE
+
+  build-and-deploy-docs:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-activate-base: false
+
+      - name: Set up Conda environment for documentation
+        run: |
+          conda init bash
+          source ~/.bashrc
+          conda create -n ci_env python=3.11 -y
+          conda activate ci_env
+          pip install --upgrade pip
+          pip install pdm==2.20.1
+          pdm config python.use_venv false
+          pdm install --dev
+
+      - name: Build documentation
+        run: |
+          source ~/.bashrc
+          conda activate ci_env
+
+          if [ ! -d "docs" ]; then
+            echo "Dossier 'docs' non trouvé. Exécution de 'make sphinx_setup'..."
+            make sphinx_setup ENV=ci_env
+          fi
+
+          pip install sphinx
+          sphinx-apidoc -o docs/source src/ --force --separate
+          cd docs
+          pdm run make clean
+          pdm run make html
+
+      - name: Deploy documentation to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/build/html

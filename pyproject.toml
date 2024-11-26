@@ -1,22 +1,20 @@
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
-
 [project]
-requires-python = ">=3.11, <3.12" 
-name = 'Python_Base_Project'
-description = 'Python project template'
-authors = [{ name = 'Arnaud Somville', email = 'arnaud.somville@estaca.eu' }]
-version = "0.1"
-dependencies = [
-    "confz>=2.0.1",
-    "pydantic>=2.6.4",
-    "fastapi>=0.110.1",
-    "uvicorn>=0.29.0",
-    "psycopg2-binary>=2.9.9",
-    "sqlalchemy>=2.0.23",
-    "sqlmodel>=0.0.12",
+requires-python = ">=3.11" 
+name = "my_project"
+description = "Default template for PDM package"
+authors = [
+    { name = 'Arnaud Somville', email = 'arnaud.somville@estaca.eu' },
+    {name = "Arnaud SOMVILLE", email = "arnaud.somville@estaca.eu"},
 ]
+version = "0.1.0"
+dependencies = [
+    "pydantic>=2.6.4",
+]
+readme = "README.md"
+license = {text = "MIT"}
+
+[tool.pdm]
+distribution = true
 
 [tool.pdm.dev-dependencies]
 dev = [
@@ -34,5 +32,16 @@ doc = [
     "sphinx>=8.0.2",
     "sphinxcontrib-apidoc>=0.5.0",
     "sphinx-rtd-theme>=3.0.0rc1",
-    "myst-parser>=4.0.0",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.pdm.lock]
+targets = [
+    { os = "any", python = ">=3.11", platform = "any" }
+]
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
