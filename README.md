@@ -1,7 +1,7 @@
 # Python base project
 
 1. To setup the environnement, make sure to install miniconda https://docs.anaconda.com/miniconda/miniconda-install/
-2. Make sur make is installed (for windows : https://gnuwin32.sourceforge.net/packages/make.htm )
+2. Make sur make is installed (for windows : https://gnuwin32.sourceforge.net/packages/make.htm , don't forget to add C:\Program Files (x86)\GnuWin32\bin to Windows' Path)
 3. Setup everything by executing the makefile. Open a terminal in this folder and execute :
 ```
 make ENV=my_env
