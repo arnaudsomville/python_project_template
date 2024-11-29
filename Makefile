@@ -12,7 +12,7 @@ CONDA_PATH := $(shell conda info --base)
 MAX_RETRIES=3
 
 # Étapes
-all: conda_env pdm_setup sphinx_setup
+all: conda_env pdm_setup sphinx_setup clean
 
 conda_env:
 	@echo "Création de l'environnement conda $(ENV)..."
