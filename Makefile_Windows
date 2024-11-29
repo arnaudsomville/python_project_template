@@ -34,5 +34,10 @@ sphinx_setup:
 
 clean:
 	@echo Nettoyage des fichiers générés...
-	-rm -rf docs/_build docs/source docs/make.bat docs/Makefile
+	if exist docs\_build rmdir /S /Q docs\_build
+	if exist docs\source rmdir /S /Q docs\source
+	if exist docs\make.bat del /F /Q docs\make.bat
+	if exist docs\Makefile del /F /Q docs\Makefile
+	if exist src\python_project_template rmdir /S /Q src\python_project_template
+	if exist tests\python_project_template rmdir /S /Q tests\python_project_template
 	@echo Fichiers nettoyés.
