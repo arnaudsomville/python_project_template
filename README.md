@@ -70,25 +70,20 @@ This project uses Sphinx to generate documentation. Follow the steps below to se
 2. **Initialize Sphinx:**
    - Run the Sphinx setup command:
      ```bash
-     sphinx-quickstart docs
+     >sphinx-quickstart --no-sep --project="Your Project" --author="Your Name" --release="0.1" --quiet docs
      ```
-   - Follow the prompts to configure Sphinx:
-     - **Separate source and build directories?** Yes.
-     - **Project name:** Enter your project name.
-     - **Author name:** Enter your name.
-     - **Project release:** Specify the release version, e.g., `0.1.0`.
-     - **Language:** Leave blank for default (English).
-
 3. **Customize `conf.py`:**
    - Open the `docs/conf.py` file to configure Sphinx.
-   - Add any required extensions, such as:
-     ```python
-     extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon", "sphinx.ext.viewcode"]
-     ```
+   - You can customize it as much as you want but a template is provided and I STRONGLY recommend you to use it (modify it with your info)
 
 4. **Generate Documentation:**
+   - Copy the sources in the documentation using
+     ```bash
+     sphinx-apidoc -o docs/source src/ --force --separate
+     ```
    - Build the documentation with:
      ```bash
+     cd docs
      make html
      ```
    - The HTML files will be generated in the `docs/_build/html` directory.
