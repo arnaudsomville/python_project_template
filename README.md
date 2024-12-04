@@ -79,7 +79,7 @@ This project uses Sphinx to generate documentation. Follow the steps below to se
 4. **Generate Documentation:**
    - Copy the sources in the documentation using
      ```bash
-     sphinx-apidoc -o docs/source src/ --force --separate
+     sphinx-apidoc -o docs/ src/ --force --separate
      ```
    - Build the documentation with:
      ```bash
