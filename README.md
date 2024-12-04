@@ -108,7 +108,7 @@ This project uses Sphinx to generate documentation. Follow the steps below to se
 - **Automate API Documentation:**
   - Use `sphinx.ext.autodoc` to automatically generate documentation from your Python code:
     ```bash
-    sphinx-apidoc -o docs/source/ src/
+    sphinx-apidoc -o docs/ src/
     ```
 
 With these steps, you can easily set up and manage your project documentation using Sphinx.
