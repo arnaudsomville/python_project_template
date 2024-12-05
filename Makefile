@@ -41,6 +41,7 @@ sphinx_setup:
 	@echo "Configuration de Sphinx avec PDM..."
 	source $(CONDA_PATH)/etc/profile.d/conda.sh && \
 	conda activate $(ENV) && \
+	sudo apt install python3-sphinx && \
 	sphinx-quickstart --no-sep --project="Your Project" --author="Your Name" --release="0.1" --quiet docs
 	@echo "Sphinx configuré avec succès."
 
