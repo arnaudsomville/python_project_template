@@ -70,7 +70,7 @@ This project uses Sphinx to generate documentation. Follow the steps below to se
 2. **Initialize Sphinx:**
    - Run the Sphinx setup command:
      ```bash
-     >sphinx-quickstart --no-sep --project="Your Project" --author="Your Name" --release="0.1" --quiet docs
+     sphinx-quickstart --no-sep --project="Your Project" --author="Your Name" --release="0.1" --quiet docs
      ```
 3. **Customize `conf.py`:**
    - Open the `docs/conf.py` file to configure Sphinx.
