@@ -11,7 +11,7 @@ PYTHON_VERSION=3.11
 CONDA_PATH := $(shell conda info --base)
 
 # Étapes
-all: conda_env pdm_setup sphinx_setup clean
+all: conda_env pdm_setup clean
 
 conda_env:
 	@echo Création de l'environnement conda $(ENV)...
@@ -25,12 +25,16 @@ pdm_setup:
 		pip install pdm==2.20.1 && \
 		pdm init
 	@echo PDM installé et initialisé avec succès dans l'environnement $(ENV).
+	@echo "Initialisation et installation des dépendances avec PDM..."
+	$(MAKE) pdm_retry
+	@echo "PDM installé avec succès dans l'environnement $(ENV)."
 
-sphinx_setup:
-	@echo Configuration de Sphinx...
-	call "$(CONDA_PATH)\Scripts\activate.bat" $(ENV) && \
-		sphinx-quickstart --no-sep --project="Your Project" --author="Your Name" --release="0.1" --quiet docs
-	@echo Sphinx configuré avec succès.
+pdm_retry:
+	@echo "Tentative d'installation avec PDM (jusqu'à $(MAX_RETRIES) essais)..."
+	@for i in $(shell seq 1 $(MAX_RETRIES)); do \
+		echo "Essai $$i sur $(MAX_RETRIES)..."; \
+		pdm install --dev && break || echo "Échec, nouvelle tentative..."; \
+	done
 
 clean:
 	@echo Nettoyage des fichiers générés...
